@@ -161,9 +161,50 @@ client.on("message", msg => {
         } else {
             msg.channel.send("You do not have the correct perms");
         }
+    } else if(msg.content.startsWith("!warn")) {
+        if(checkPerms(msg)) {
+            var member = msg.mentions.members.first();
+            if(member == null) {
+                msg.channel.send("You need to mention a person");
+            } else {
+                const args = msg.content.split(" ");
+                args.splice(0, 2)
+                var output = ""
+                for( i = 0; i < args.length; i++) {
+                    output = output + args[i] + " ";
+                }
+                output = output.trim();
+
+                const embed = new Discord.MessageEmbed();
+                embed.setTitle(getName(msg.member) + " has warned you");
+                embed.setColor(0xff0000);
+                if(output == "") {
+                    embed.setDescription("You have been warned");
+                } else {
+                    embed.setDescription("Reason: `" + output + "`");
+
+                }
+                member.send(embed);
+
+                // Logging
+                const channel = msg.client.channels.resolve(logsChannel);
+                const logsEmbed = new Discord.MessageEmbed();
+                logsEmbed.setTitle("User was warned");
+                logsEmbed.setColor(0xff0000);
+                if(output == "") {
+                    logsEmbed.setDescription(getName(msg.member) + " warned " + getName(member));
+                } else {
+                    logsEmbed.setDescription(getName(msg.member) + " warned " + getName(member) + " with reason `" + output + "`");
+                }
+                channel.send(logsEmbed)
+                console.log(getName(msg.member) + " warned " + getName(member));
+            } 
+        } else {
+            msg.channel.send("You don't have the permissions to warn someone")
+        }
     } else if (msg.content.startsWith("!modcommands")) {
         if (checkPerms(msg)) {
-            msg.author.send("**Commands**\n!kick <user> - Kicks a user\n!ban <user> Bans a user\n!mute <user> Puts the user in purg\n!unmute <user> brings a user out of purg\n!tempban <user> places a user in tempban\n!untempban <user> brings a user out of temp ban");
+            msg.author.send("**Commands**\n!kick <user> - Kicks a user\n!ban <user> Bans a user\n!warn <user> <reason> warns a user\n!mute <user> Puts the user in purg\n!unmute <user> brings a user out of purg\n!tempban <user> places a user in tempban\n!untempban <user> brings a user out of temp ban");
         } else {
             msg.author.send("Well Well Well. It appears that you dont have the correct permissions to use the bot so why would I tell you what the bot can do when your a bad boy/girl?")
         }
