@@ -7,10 +7,12 @@ require('dotenv').config();
 // Provide Reasons for ban & kick
 
 // Channels
+const CabeyGangRole = process.env.CABEY_GANG_ROLE;
+
 const logsChannel = process.env.LOGS_CHANNEL;
 const purgRoleName = process.env.PURG_ROLE;
-const tempBanRoleName = process.env.
-const CabeyGangRole = process.env.CABEY_GANG_ROLE;
+const tempBanRoleName = process.env.BAN_ROLE;
+
 
 const allowedRoles = process.env.BOT_USER_ROLES.split(',');
 
