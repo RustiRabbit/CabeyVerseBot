@@ -164,41 +164,39 @@ client.on("message", msg => {
     } else if(msg.content.startsWith("!warn")) {
         if(checkPerms(msg)) {
             var member = msg.mentions.members.first();
-            if(member == null) {
-                msg.channel.send("You need to mention a person");
+            
+            const args = msg.content.split(" ");
+            args.splice(0, 2)
+            var output = ""
+            for( i = 0; i < args.length; i++) {
+                output = output + args[i] + " ";
+            }
+            output = output.trim();
+
+            const embed = new Discord.MessageEmbed();
+            embed.setTitle(getName(msg.member) + " has warned you");
+            embed.setColor(0xff0000);
+            if(output == "") {
+                embed.setDescription("You have been warned");
             } else {
-                const args = msg.content.split(" ");
-                args.splice(0, 2)
-                var output = ""
-                for( i = 0; i < args.length; i++) {
-                    output = output + args[i] + " ";
-                }
-                output = output.trim();
+                embed.setDescription("Reason: `" + output + "`");
 
-                const embed = new Discord.MessageEmbed();
-                embed.setTitle(getName(msg.member) + " has warned you");
-                embed.setColor(0xff0000);
-                if(output == "") {
-                    embed.setDescription("You have been warned");
-                } else {
-                    embed.setDescription("Reason: `" + output + "`");
+            }
+            member.send(embed);
 
-                }
-                member.send(embed);
-
-                // Logging
-                const channel = msg.client.channels.resolve(logsChannel);
-                const logsEmbed = new Discord.MessageEmbed();
-                logsEmbed.setTitle("User was warned");
-                logsEmbed.setColor(0xff0000);
-                if(output == "") {
-                    logsEmbed.setDescription(getName(msg.member) + " warned " + getName(member));
-                } else {
-                    logsEmbed.setDescription(getName(msg.member) + " warned " + getName(member) + " with reason `" + output + "`");
-                }
-                channel.send(logsEmbed)
-                console.log(getName(msg.member) + " warned " + getName(member));
-            } 
+            // Logging
+            const channel = msg.client.channels.resolve(logsChannel);
+            const logsEmbed = new Discord.MessageEmbed();
+            logsEmbed.setTitle("User was warned");
+            logsEmbed.setColor(0xff0000);
+            if(output == "") {
+                logsEmbed.setDescription(getName(msg.member) + " warned " + getName(member));
+            } else {
+                logsEmbed.setDescription(getName(msg.member) + " warned " + getName(member) + " with reason `" + output + "`");
+            }
+            channel.send(logsEmbed)
+            console.log(getName(msg.member) + " warned " + getName(member));
+            
         } else {
             msg.channel.send("You don't have the permissions to warn someone")
         }
