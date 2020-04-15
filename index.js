@@ -19,7 +19,7 @@ client.login(process.env.TOKEN);
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
-    client.user.setActivity("!commands for help"); 
+    client.user.setActivity("!modcommands for help"); 
 
 })
 
@@ -161,7 +161,7 @@ client.on("message", msg => {
         } else {
             msg.channel.send("You do not have the correct perms");
         }
-    } else if (msg.content.startsWith("!commands")) {
+    } else if (msg.content.startsWith("!modcommands")) {
         if (checkPerms(msg)) {
             msg.author.send("**Commands**\n!kick <user> - Kicks a user\n!ban <user> Bans a user\n!mute <user> Puts the user in purg\n!unmute <user> brings a user out of purg\n!tempban <user> places a user in tempban\n!untempban <user> brings a user out of temp ban");
         } else {
