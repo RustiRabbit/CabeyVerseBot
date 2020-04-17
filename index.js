@@ -75,7 +75,7 @@ client.on("message", msg => {
         }  else {
             msg.channel.send("You do not have the correct perms");
         }
-    } else if (msg.content.startsWith("!mute") || msg.content.startsWith("!purg")) {
+    } else if (msg.content.startsWith("!mute")) {
         var member = msg.mentions.members.first();
 
         if(checkPerms(msg) == true) {
@@ -98,7 +98,7 @@ client.on("message", msg => {
         }
 
         
-    } else if (msg.content.startsWith("!unmute") || msg.content.startsWith("!unpurg")) {
+    } else if (msg.content.startsWith("!unmute")) {
         var member = msg.mentions.members.first();
         
         if(checkPerms(msg) == true) {
@@ -242,9 +242,37 @@ client.on("message", msg => {
             msg.channel.send("You don't have the correct perms");
         }
         
+    } else if (msg.content.startsWith("!purge")) {
+        if(checkPerms(msg)) {
+            const numbers = msg.content.split(" ");
+            try {
+                var arg = parseInt(numbers[1]);
+                msg.channel.bulkDelete(arg)
+                    .then(messages => {
+                        console.log(`Bulk deleted ${messages.size} messages`)
+                        const channel = msg.client.channels.resolve(logsChannel);
+                        const embed = new Discord.MessageEmbed();
+                        embed.setTitle("Bulk Message Delete");
+                        embed.setColor(0xff0000);
+                        embed.setDescription(getName(msg.member) + " bulk delted messages in " + msg.channel.name);
+                        channel.send(embed)
+                        msg.author.send("You bulk deleted messages in #" + msg.channel.name);
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        msg.channel.send("There was an error");
+                    });
+                
+            } catch (err) {
+                msg.channel.send("There was an error");
+            }
+        } else {
+            msg.channel.send("You don't have the correct perms");
+        }
+        
     } else if (msg.content.startsWith("!modcommands")) {
         if (checkPerms(msg)) {
-            msg.author.send("**Commands**\n!kick <user> - Kicks a user\n!ban <user> Bans a user\n!warn <user> <reason> warns a user\n!mute <user> Puts the user in purg\n!unmute <user> brings a user out of purg\n!tempban <user> places a user in tempban\n!untempban <user> brings a user out of temp ban\n!lock locks the channel\n!unlock unlocks the channel");
+            msg.author.send("**Commands**\n!kick <user> - Kicks a user\n!ban <user> Bans a user\n!warn <user> <reason> warns a user\n!mute <user> Puts the user in purg\n!unmute <user> brings a user out of purg\n!tempban <user> places a user in tempban\n!untempban <user> brings a user out of temp ban\n!lock locks the channel\n!unlock unlocks the channel\n!purge <number> bulk delete messages");
         } else {
             msg.author.send("Well Well Well. It appears that you dont have the correct permissions to use the bot so why would I tell you what the bot can do when your a bad boy/girl?")
         }
