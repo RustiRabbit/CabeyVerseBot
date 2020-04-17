@@ -200,9 +200,51 @@ client.on("message", msg => {
         } else {
             msg.channel.send("You don't have the permissions to warn someone")
         }
+    } else if (msg.content.startsWith("!lock")) {
+        if(checkPerms(msg)) {
+            console.log(getName(msg.member) + " locked #" + msg.channel.name);
+            msg.channel.overwritePermissions([
+                {
+                    id: CabeyGangRole,
+                    deny: ['SEND_MESSAGES'],
+                },
+            ]);
+    
+            const channel = msg.client.channels.resolve(logsChannel);
+            const embed = new Discord.MessageEmbed();
+            embed.setTitle("Channel was locked");
+            embed.setColor(0xff0000);
+            embed.setDescription(getName(msg.member) + " locked channel #" + msg.channel.name);
+            channel.send(embed)
+    
+            msg.channel.send("Channel Locked");
+        } else {
+            msg.channel.send("You don't have the correct perms");
+        }
+        
+    } else if (msg.content.startsWith("!unlock")) {
+        if(checkPerms(msg)) {
+            console.log(getName(msg.member) + " unlocked #" + msg.channel.name)
+            msg.channel.overwritePermissions([
+                {
+                    id: CabeyGangRole,
+                    allow: ['SEND_MESSAGES'],
+                },
+            ]);
+            const channel = msg.client.channels.resolve(logsChannel);
+            const embed = new Discord.MessageEmbed();
+            embed.setTitle("Channel was unlocked");
+            embed.setColor(0xff0000);
+            embed.setDescription(getName(msg.member) + " unlocked channel #" + msg.channel.name);
+            channel.send(embed)
+            msg.channel.send("Channel Unlocked");   
+        } else {
+            msg.channel.send("You don't have the correct perms");
+        }
+        
     } else if (msg.content.startsWith("!modcommands")) {
         if (checkPerms(msg)) {
-            msg.author.send("**Commands**\n!kick <user> - Kicks a user\n!ban <user> Bans a user\n!warn <user> <reason> warns a user\n!mute <user> Puts the user in purg\n!unmute <user> brings a user out of purg\n!tempban <user> places a user in tempban\n!untempban <user> brings a user out of temp ban");
+            msg.author.send("**Commands**\n!kick <user> - Kicks a user\n!ban <user> Bans a user\n!warn <user> <reason> warns a user\n!mute <user> Puts the user in purg\n!unmute <user> brings a user out of purg\n!tempban <user> places a user in tempban\n!untempban <user> brings a user out of temp ban\n!lock locks the channel\n!unlock unlocks the channel");
         } else {
             msg.author.send("Well Well Well. It appears that you dont have the correct permissions to use the bot so why would I tell you what the bot can do when your a bad boy/girl?")
         }
