@@ -92,7 +92,8 @@ client.on("message", msg => {
     
             }).catch( (error)=> {
                 console.log(error);
-                msg.channel.send("Error (ask RustiRabbit)");
+                msg.channel.send("Error (ask RustiRabbit). Maybe perm conflict?");
+                
             }); 
         } else {
             msg.channel.send("You do not have the correct perms");
@@ -258,6 +259,7 @@ client.on("message", msg => {
                         embed.setDescription(getName(msg.member) + " bulk delted messages in " + msg.channel.name);
                         channel.send(embed)
                         msg.author.send("You bulk deleted messages in #" + msg.channel.name);
+                        msg.channel.send(getName(msg.author) + " bulk deleted messages");
                     })
                     .catch((err) => {
                         console.log(err);
