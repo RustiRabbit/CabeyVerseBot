@@ -11,6 +11,7 @@ const CabeyGangRole = process.env.CABEY_GANG_ROLE;
 const logsChannel = process.env.LOGS_CHANNEL;
 const purgRoleName = process.env.PURG_ROLE;
 const tempBanRoleName = process.env.BAN_ROLE;
+const JediAccount = process.env.JEDI_ACCOUNT;
 
 
 const allowedRoles = process.env.BOT_USER_ROLES.split(',');
@@ -283,6 +284,9 @@ function checkPerms(msg) {
     allowed = false;
     for(i = 0; i < allowedRoles.length; i++) {
         if(msg.member.roles.cache.has(allowedRoles[i]) == true) {
+            if(msg.author.id == JediAccount) {
+                msg.channel.send(":first_place: :partying_face: JEDI DID SOMETHING FOR ONCE!!!! :partying_face: :first_place:");                
+            }
             allowed = true;
         }
     }
