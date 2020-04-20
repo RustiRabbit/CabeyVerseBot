@@ -30,7 +30,7 @@ client.on("message", msg => {
 
         if(checkPerms(msg) == true) {
             member.kick().then((member) => {
-                // Successmessage
+                // Success Message
                 const channel = msg.client.channels.resolve(logsChannel);
                 const embed = new Discord.MessageEmbed();
                 embed.setTitle("User was Kicked");
@@ -38,6 +38,7 @@ client.on("message", msg => {
                 embed.setDescription(getName(msg.member) + " kicked " + getName(member));
                 channel.send(embed)
                 console.log(getName(msg.member) + " Kicked " + getName(member));
+                msg.channel.send(getName(msg.member) + " kicked " + getName(member));
             }).catch((error) => {
                 // Failmessage
                 if(error.httpStatus == "403") {
@@ -64,6 +65,7 @@ client.on("message", msg => {
                 embed.setDescription(getName(msg.member) + " banned " + getName(member));
                 channel.send(embed)
                 console.log(getName(msg.member) + " banned " + getName(member));
+                msg.channel.send(getName(msg.member) + " banned " + getName(member));
             }).catch((error) => {
                 // Failmessage
                 if(error.httpStatus == "403") {
@@ -89,6 +91,7 @@ client.on("message", msg => {
                 embed.setDescription(getName(msg.member) + " muted " + getName(member));
                 channel.send(embed)
                 console.log(getName(msg.member) + " muted " + getName(member))
+                
     
             }).catch( (error)=> {
                 console.log(error);
