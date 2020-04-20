@@ -286,6 +286,7 @@ function checkPerms(msg) {
         if(msg.member.roles.cache.has(allowedRoles[i]) == true) {
             if(msg.author.id == JediAccount) {
                 msg.channel.send(":first_place: :partying_face: JEDI DID SOMETHING FOR ONCE!!!! :partying_face: :first_place:");                
+                console.log("Jedi has said something!");
             }
             allowed = true;
         }
