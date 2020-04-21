@@ -233,8 +233,12 @@ client.on("message", msg => {
             msg.channel.overwritePermissions([
                 {
                     id: CabeyGangRole,
-                    allow: ['SEND_MESSAGES'],
+                    allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
                 },
+                {
+                    id: msg.channel.guild.roles.everyone,
+                    block: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
+                }
             ]);
             const channel = msg.client.channels.resolve(logsChannel);
             const embed = new Discord.MessageEmbed();
@@ -262,15 +266,15 @@ client.on("message", msg => {
                         embed.setDescription(getName(msg.member) + " bulk delted messages in " + msg.channel.name);
                         channel.send(embed)
                         msg.author.send("You bulk deleted messages in #" + msg.channel.name);
-                        msg.channel.send(getName(msg.author) + " bulk deleted messages");
+                        msg.channel.send(getName(msg.member) + " bulk deleted messages");
                     })
                     .catch((err) => {
                         console.log(err);
-                        msg.channel.send("There was an error");
+                        msg.channel.send("There was an error (1)");
                     });
                 
             } catch (err) {
-                msg.channel.send("There was an error");
+                msg.channel.send("There was an error (2)");
             }
         } else {
             msg.channel.send("You don't have the correct perms");
