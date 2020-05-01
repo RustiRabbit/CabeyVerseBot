@@ -189,6 +189,9 @@ client.on("message", msg => {
             }
             member.send(embed);
 
+            // Send in Chat
+            msg.channel.send(getName(msg.member) + " has warned " + getName(member));
+
             // Logging
             const channel = msg.client.channels.resolve(logsChannel);
             const logsEmbed = new Discord.MessageEmbed();
