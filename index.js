@@ -3,9 +3,6 @@ const client = new Discord.Client();
 require('dotenv').config();
 
 
-// TODO
-// Provide Reasons for ban & kick
-
 // Channels
 const CabeyGangRole = process.env.CABEY_GANG_ROLE;
 const logsChannel = process.env.LOGS_CHANNEL;
@@ -49,7 +46,7 @@ client.on("message", msg => {
                 console.log(error);
             });
         } else {
-            msg.channel.send("You do not have the correct perms");
+            msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
 
     } else if (msg.content.startsWith("!ban")) {
@@ -76,7 +73,7 @@ client.on("message", msg => {
                 console.log(error);
             });
         }  else {
-            msg.channel.send("You do not have the correct perms");
+            msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
     } else if (msg.content.startsWith("!mute")) {
         var member = msg.mentions.members.first();
@@ -99,7 +96,7 @@ client.on("message", msg => {
                 
             }); 
         } else {
-            msg.channel.send("You do not have the correct perms");
+            msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
 
         
@@ -122,7 +119,7 @@ client.on("message", msg => {
                 console.log(error);
             })
         } else {
-            msg.channel.send("You do not have the correct perms");
+            msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
     } else if (msg.content.startsWith("!tempban")) {
         var member = msg.mentions.members.first();
@@ -143,7 +140,7 @@ client.on("message", msg => {
                 msg.channel.send("Error (ask RustiRabbit)");
             }); 
         } else {
-            msg.channel.send("You do not have the correct perms");
+            msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
     } else if (msg.content.startsWith("!untempban")) {
         var member = msg.mentions.members.first();
@@ -164,7 +161,7 @@ client.on("message", msg => {
                 console.log(error);
             })
         } else {
-            msg.channel.send("You do not have the correct perms");
+            msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
     } else if(msg.content.startsWith("!warn")) {
         if(checkPerms(msg)) {
@@ -206,7 +203,7 @@ client.on("message", msg => {
             console.log(getName(msg.member) + " warned " + getName(member));
             
         } else {
-            msg.channel.send("You don't have the permissions to warn someone")
+            msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
     } else if (msg.content.startsWith("!lock")) {
         if(checkPerms(msg)) {
@@ -227,7 +224,7 @@ client.on("message", msg => {
     
             msg.channel.send("Channel Locked");
         } else {
-            msg.channel.send("You don't have the correct perms");
+            msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
         
     } else if (msg.content.startsWith("!unlock")) {
@@ -251,7 +248,7 @@ client.on("message", msg => {
             channel.send(embed)
             msg.channel.send("Channel Unlocked");   
         } else {
-            msg.channel.send("You don't have the correct perms");
+            msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
         
     } else if (msg.content.startsWith("!purge")) {
@@ -280,7 +277,7 @@ client.on("message", msg => {
                 msg.channel.send("There was an error (2)");
             }
         } else {
-            msg.channel.send("You don't have the correct perms");
+            msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
         
     } else if (msg.content.startsWith("!modcommands")) {
