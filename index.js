@@ -26,7 +26,7 @@ client.on("message", msg => {
     // Log Message
     if(msg.channel != messageChannel) {
         const messageLogChannel = msg.client.channels.resolve(messageChannel);
-        messageLogChannel.send("`" + getName(msg.member) + "` - " + msg.content);
+        messageLogChannel.send("`" + getName(msg.member) + "`/`#" + msg.channel.name + "`- " + msg.content);
     }
     
 
