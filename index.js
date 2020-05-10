@@ -6,6 +6,7 @@ require('dotenv').config();
 // Channels
 const CabeyGangRole = process.env.CABEY_GANG_ROLE;
 const logsChannel = process.env.LOGS_CHANNEL;
+const messageChannel = process.env.MESSAGE_LOG_CHANNEL;
 const purgRoleName = process.env.PURG_ROLE;
 const tempBanRoleName = process.env.BAN_ROLE;
 const JediAccount = process.env.JEDI_ACCOUNT;
@@ -22,6 +23,13 @@ client.on('ready', () => {
 })
 
 client.on("message", msg => {
+    // Log Message
+    if(msg.channel != messageChannel) {
+        const messageLogChannel = msg.client.channels.resolve(messageChannel);
+        messageLogChannel.send("`" + getName(msg.member) + "` - " + msg.content);
+    }
+    
+
     if(msg.content.startsWith("!kick")) {
         var member = msg.mentions.members.first();
 
