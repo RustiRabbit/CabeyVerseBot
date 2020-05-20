@@ -311,9 +311,5 @@ function checkPerms(msg) {
 }
 
 function getName(member) {
-    if(member.nickname == null) {
-        return member.user.tag;
-    } else {
-        return member.nickname;
-    }
+    return member.user.tag;
 }
