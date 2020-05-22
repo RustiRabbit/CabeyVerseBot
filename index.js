@@ -24,10 +24,15 @@ client.on('ready', () => {
 
 client.on("message", msg => {
     // Log Message
-    if(msg.channel != messageChannel) {
+    if(msg.channel != messageChannel) { 
+        var message = msg.cleanContent;
+        // Remove pings
+        message = message.split("@everyone").join("[@]everyone");
+        message = message.split("@here").join("[@]here");
+
         const messageLogChannel = msg.client.channels.resolve(messageChannel);
         if(msg.member != null) {
-            messageLogChannel.send("`" + getName(msg.member) + "`/`#" + msg.channel.name + "`- " + msg.content);
+            messageLogChannel.send("`" + getName(msg.member) + "`/`#" + msg.channel.name + "`- " + message);
         }
     }
     
