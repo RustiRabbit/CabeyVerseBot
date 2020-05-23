@@ -138,22 +138,51 @@ client.on("message", msg => {
         }
     } else if (msg.content.startsWith("!tempban")) {
         var member = msg.mentions.members.first();
+        var prefix = "!tempban"
+        const args = msg.content.slice(prefix.length).split(' ');
+        const command = args.shift().toLowerCase();
 
         if(checkPerms(msg) == true) {
-            member.roles.member.roles.set([tempBanRoleName]).then( () => {
-                msg.channel.send("`" + getName(member) + "` has been temp banned");
-                const channel = msg.client.channels.resolve(logsChannel);
-                const embed = new Discord.MessageEmbed();
-                embed.setTitle("User was given a temp ban");
-                embed.setColor(0xff0000);
-                embed.setDescription(getName(msg.member) + " temp banned " + getName(member));
-                channel.send(embed)
-                console.log(getName(msg.member) + " temp banned " + getName(member))
+            var time = "";
+                var reason = "";
+                var upToReason = false;
+                
+            for(i = 1; i < args.length; i++) {
+                if(args[i] == "|") {
+                    upToReason = true;
+                } else if (upToReason == false) {
+                    time = time + args[i] + " ";
+                } else {
+                    reason = reason + args[i] + " ";
+                }
+            }
+            
+            if(time == "" || reason == "") {
+                msg.channel.send("Wrong Usage: !tempban <@user> <time> | <reason> *(make sure to include a space around | on both sides)*")
+            } else {
+                member.roles.member.roles.set([tempBanRoleName]).then( () => {
+                    msg.channel.send("`" + getName(member) + "` has been temp banned");
+                    const channel = msg.client.channels.resolve(logsChannel);
+                    const embed = new Discord.MessageEmbed();
+                    embed.setTitle("User was given a temp ban");
+                    embed.setColor(0xff0000);
+                    embed.setDescription(getName(msg.member) + " temp banned " + getName(member) + "\n**Reason:** " + reason + "\n**Length:** " + time);
+                    channel.send(embed)
+                    console.log(getName(msg.member) + " temp banned " + getName(member))
     
-            }).catch( (error)=> {
-                console.log(error);
-                msg.channel.send("Error (ask RustiRabbit)");
-            }); 
+                    const banEmbed = new Discord.MessageEmbed();
+                    banEmbed.setTitle("You've been Temp-Banned from Cabey's Cove")
+                    banEmbed.setColor(0xff000);
+                    banEmbed.setDescription("**Temp-Banned By:** " + getName(msg.member) + "\n**Reason:** " + reason + "\n**Length:** " + time);
+                    member.send(banEmbed);
+        
+                }).catch( (error)=> {
+                    console.log(error);
+                    msg.channel.send("Error (ask RustiRabbit)");
+                }); 
+            }
+
+            
         } else {
             msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
@@ -297,7 +326,7 @@ client.on("message", msg => {
         
     } else if (msg.content.startsWith("!modcommands")) {
         if (checkPerms(msg)) {
-            msg.author.send("**Commands**\n!kick <user> - Kicks a user\n!ban <user> Bans a user\n!warn <user> <reason> warns a user\n!mute <user> Puts the user in purg\n!unmute <user> brings a user out of purg\n!tempban <user> places a user in tempban\n!untempban <user> brings a user out of temp ban\n!lock locks the channel\n!unlock unlocks the channel\n!purge <number> bulk delete messages");
+            msg.author.send("**Commands**\n!kick <user> - Kicks a user\n!ban <user> Bans a user\n!warn <user> <reason> warns a user\n!mute <user> Puts the user in purg\n!unmute <user> brings a user out of purg\n!tempban <@user> <time> | <reason> -  places a user in tempban\n!untempban <user> brings a user out of temp ban\n!lock locks the channel\n!unlock unlocks the channel\n!purge <number> bulk delete messages");
         } else {
             msg.author.send("Well Well Well. It appears that you dont have the correct permissions to use the bot so why would I tell you what the bot can do when your a bad boy/girl?")
         }
