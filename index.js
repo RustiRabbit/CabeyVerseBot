@@ -1,5 +1,3 @@
-// Hey Colby
-
 const Discord = require("discord.js");
 const client = new Discord.Client();
 require('dotenv').config();
@@ -21,7 +19,6 @@ client.login(process.env.TOKEN);
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
     client.user.setActivity("!modcommands for help"); 
-
 })
 
 client.on("message", msg => {
