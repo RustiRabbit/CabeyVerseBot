@@ -1,3 +1,5 @@
+// Hey Colby
+
 const Discord = require("discord.js");
 const client = new Discord.Client();
 require('dotenv').config();
@@ -173,7 +175,7 @@ client.on("message", msg => {
                     const banEmbed = new Discord.MessageEmbed();
                     banEmbed.setTitle("You've been Temp-Banned from Cabey's Cove")
                     banEmbed.setColor(0xff000);
-                    banEmbed.setDescription("**Temp-Banned By:** " + getName(msg.member) + "\n**Reason:** " + reason + "\n**Length:** " + time);
+                    banEmbed.setDescription("**Temp-Banned By:** " + getName(msg.member) + "\n**Reason:** " + reason + "\n**Length:** " + time + "\n`Ask any Admin or Staff for appeal`");
                     member.send(banEmbed);
         
                 }).catch( (error)=> {
