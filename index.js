@@ -283,7 +283,7 @@ client.on("message", msg => {
                 },
                 {
                     id: msg.channel.guild.roles.everyone,
-                    block: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
+                    deny: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
                 }
             ]);
             const channel = msg.client.channels.resolve(logsChannel);
