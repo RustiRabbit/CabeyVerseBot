@@ -284,6 +284,14 @@ client.on("message", msg => {
                 {
                     id: msg.channel.guild.roles.everyone,
                     deny: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
+                },
+                {
+                    id: tempBanRoleName,
+                    deny: ['SEND_MESSAGES', 'VIEW_CHANNEL']
+                },
+                {
+                    id: purgRoleName,
+                    deny: ['SEND_MESSAGES'] 
                 }
             ]);
             const channel = msg.client.channels.resolve(logsChannel);
