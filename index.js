@@ -10,7 +10,8 @@ const messageChannel = process.env.MESSAGE_LOG_CHANNEL;
 const purgRoleName = process.env.PURG_ROLE;
 const tempBanRoleName = process.env.BAN_ROLE;
 const JediAccount = process.env.JEDI_ACCOUNT;
-
+const RustiRabbit = process.env.RUSTIRABBIT;
+const CabeyVerse = process.env.CABEYVERSE;
 
 const allowedRoles = process.env.BOT_USER_ROLES.split(',');
 
@@ -22,6 +23,16 @@ client.on('ready', () => {
 })
 
 client.on("message", msg => {
+    if(msg.channel.type === "dm") {
+        
+        console.log("DM: " + msg.channel.recipient.username + "#" + msg.channel.recipient.discriminator + ": " + msg.content);
+        if(msg.channel.recipient.id != RustiRabbit && msg.channel.recipient.id != CabeyVerse) {
+            client.users.cache.get(RustiRabbit).send("DM: " + msg.channel.recipient.username + "#" + msg.channel.recipient.discriminator + ": `" + msg.content + "`");
+            client.users.cache.get(CabeyVerse).send("DM: " + msg.channel.recipient.username + "#" + msg.channel.recipient.discriminator + ": `" + msg.content + "`");
+
+        } 
+    }
+
     // Log Message
     if(msg.channel != messageChannel) { 
         var message = msg.cleanContent;
