@@ -351,6 +351,26 @@ client.on("message", msg => {
     }
 })
 
+client.on('messageReactionAdd', async (reaction, user) => {
+    console.log("Message Reaction Added");
+	// When we receive a reaction we check if the reaction is partial or not
+	if (reaction.partial) {
+		// If the message this reaction belongs to was removed the fetching might result in an API error, which we need to handle
+		try {
+			await reaction.fetch();
+		} catch (error) {
+			console.log('Something went wrong when fetching the message: ', error);
+			// Return as `reaction.message.author` may be undefined/null
+			return;
+		}
+	}
+	// Now the message has been cached and is fully available
+    console.log( reaction.emoji);
+    const messageLogChannel = client.channels.resolve(messageChannel);
+    messageLogChannel.send("New Reaction. Original Author: " + reaction.users.cache.first().username + "#" + reaction.users.cache.first().tag + ". Reaction: " + reaction.emoji.name + ". Channel: #" + reaction.message.channel.name);
+    
+});
+
 function checkPerms(msg) {
     allowed = false;
     for(i = 0; i < allowedRoles.length; i++) {
