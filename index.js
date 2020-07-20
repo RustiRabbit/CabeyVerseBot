@@ -367,7 +367,7 @@ client.on('messageReactionAdd', async (reaction, user) => {
 	// Now the message has been cached and is fully available
     console.log( reaction.emoji);
     const messageLogChannel = client.channels.resolve(messageChannel);
-    messageLogChannel.send("New Reaction. Original Author: " + reaction.users.cache.first().username + "#" + reaction.users.cache.first().tag + ". Reaction: " + reaction.emoji.name + ". Channel: #" + reaction.message.channel.name);
+    messageLogChannel.send("New Reaction. Original Author: " + reaction.users.cache.first().username + ". Reaction: " + reaction.emoji.name + ". Channel: #" + reaction.message.channel.name);
     
 });
 
