@@ -267,7 +267,7 @@ client.on("message", msg => {
             msg.channel.overwritePermissions([
                 {
                     id: CabeyGangRole,
-                    allow: ['VIEW_CHANNEL', 'CREATE_INSTANT_INVITE'],
+                    allow: ['VIEW_CHANNEL', 'CREATE_INSTANT_INVITE', 'READ_MESSAGE_HISTORY'],
                     deny: ['SEND_MESSAGES']
                 },
                 {
