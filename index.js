@@ -9,6 +9,8 @@ const logsChannel = process.env.LOGS_CHANNEL;
 const messageChannel = process.env.MESSAGE_LOG_CHANNEL;
 const purgRoleName = process.env.PURG_ROLE;
 const tempBanRoleName = process.env.BAN_ROLE;
+const HelperRoleName = process.env.HELPER_ROLE;
+const ModRoleName = process.env.MOD_ROLE;
 const JediAccount = process.env.JEDI_ACCOUNT;
 const RustiRabbit = process.env.RUSTIRABBIT;
 const CabeyVerse = process.env.CABEYVERSE;
@@ -266,7 +268,26 @@ client.on("message", msg => {
                 {
                     id: CabeyGangRole,
                     deny: ['SEND_MESSAGES'],
+                    allow: ['READ_MESSAGES', 'CREATE_INSTANT_INVITE']
                 },
+                {
+                    id: msg.channel.guild.roles.everyone,
+                    deny: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'SEND_TTS_MESSAGES', 'MANAGE_MESSAGES', 'READ_MESSAGE_HISTORY', 'MENTION_EVERYONE', 'ADD_REACTIONS', 'MANAGE_CHANNELS'],
+                },
+                {
+                    id: purgRoleName,
+                    deny: ['SEND_MESSAGES'],
+                    allow: ['CREATE_INSTANT_INVITE', 'READ_MESSAGES', 'READ_MESSAGE_HISTORY']
+                },
+                {
+                    id: ModRoleName,
+                    allow: ['CREATE_INSTANT_INVITE', 'READ_MESSAGES', "SEND_MESSAGES", 'MANAGE_MESSAGES', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS', 'ADD_REACTIONS']
+                },
+                {
+                    id: HelperRoleName,
+                    allow: ['CREATE_INSTANT_INVITE', 'READ_MESSAGES', "SEND_MESSAGES", 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS', 'ADD_REACTIONS']
+                }
+
             ]);
     
             const channel = msg.client.channels.resolve(logsChannel);
@@ -286,21 +307,23 @@ client.on("message", msg => {
             console.log(getName(msg.member) + " unlocked #" + msg.channel.name)
             msg.channel.overwritePermissions([
                 {
-                    id: CabeyGangRole,
-                    allow: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
-                },
-                {
                     id: msg.channel.guild.roles.everyone,
-                    deny: ['SEND_MESSAGES', 'VIEW_CHANNEL'],
+                    deny: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'SEND_TTS_MESSAGES', 'MANAGE_MESSAGES', 'READ_MESSAGE_HISTORY', 'MENTION_EVERYONE', 'ADD_REACTIONS', 'MANAGE_CHANNELS'],
                 },
                 {
-                    id: tempBanRoleName,
-                    deny: ['SEND_MESSAGES', 'VIEW_CHANNEL']
+                    id: CabeyGangRole,
+                    allow: ["CREATE_INSTANT_INVITE", 'READ_MESSAGES', 'SEND_MESSAGES', "EMBED_LINKS", 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS', 'ADD_REACTIONS']
                 },
                 {
-                    id: purgRoleName,
-                    deny: ['SEND_MESSAGES'] 
-                }
+                    id:purgRoleName,
+                    allow: ['CREATE_INSTANT_INVITE', 'READ_MESSAGES', 'READ_MESSAGE_HISTORY'],
+                    deny: ['SEND_MESSAGES']
+                },
+                {
+                    id: ModRoleName,
+                    allow: ['CREATE_INSTANT_INVITE', 'READ_MESSAGES', "SEND_MESSAGES", 'MANAGE_MESSAGES', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS', 'ADD_REACTIONS']
+                },
+
             ]);
             const channel = msg.client.channels.resolve(logsChannel);
             const embed = new Discord.MessageEmbed();
