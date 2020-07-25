@@ -272,7 +272,7 @@ client.on("message", msg => {
                 },
                 {
                     id: msg.channel.guild.roles.everyone,
-                    deny: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'SEND_TTS_MESSAGES', 'MANAGE_MESSAGES', 'READ_MESSAGE_HISTORY', 'MENTION_EVERYONE', 'ADD_REACTIONS', 'MANAGE_CHANNELS', "ATTACH_FILES", "EMBED_LINKS", 'MANAGE_CHANNELS', 'CREATE_INSTANT_INVITE', 'USE_EXTERNAL_EMOJIS', 'MANAGE_WEBHOOKS', 'MANAGE_GUILD'],
+                    deny: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'SEND_TTS_MESSAGES', 'MANAGE_MESSAGES', 'READ_MESSAGE_HISTORY', 'MENTION_EVERYONE', 'ADD_REACTIONS', 'MANAGE_CHANNELS', "ATTACH_FILES", "EMBED_LINKS", 'MANAGE_CHANNELS', 'CREATE_INSTANT_INVITE', 'USE_EXTERNAL_EMOJIS', 'MANAGE_WEBHOOKS', 'MANAGE_GUILD', 'MANAGE_ROLES'],
                 },
                 {
                     id: purgRoleName,
@@ -308,7 +308,7 @@ client.on("message", msg => {
             msg.channel.overwritePermissions([
                 {
                     id: msg.channel.guild.roles.everyone,
-                    deny: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'SEND_TTS_MESSAGES', 'MANAGE_MESSAGES', 'READ_MESSAGE_HISTORY', 'MENTION_EVERYONE', 'ADD_REACTIONS', 'MANAGE_CHANNELS', "ATTACH_FILES", "EMBED_LINKS", 'MANAGE_CHANNELS', 'CREATE_INSTANT_INVITE', 'USE_EXTERNAL_EMOJIS', 'MANAGE_WEBHOOKS', 'MANAGE_GUILD'],
+                    deny: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'SEND_TTS_MESSAGES', 'MANAGE_MESSAGES', 'READ_MESSAGE_HISTORY', 'MENTION_EVERYONE', 'ADD_REACTIONS', 'MANAGE_CHANNELS', "ATTACH_FILES", "EMBED_LINKS", 'MANAGE_CHANNELS', 'CREATE_INSTANT_INVITE', 'USE_EXTERNAL_EMOJIS', 'MANAGE_WEBHOOKS', 'MANAGE_GUILD', 'MANAGE_ROLES'],
                 },
                 {
                     id: CabeyGangRole,
