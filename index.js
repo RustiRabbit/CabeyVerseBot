@@ -267,7 +267,7 @@ client.on("message", msg => {
             msg.channel.overwritePermissions([
                 {
                     id: CabeyGangRole,
-                    allow: ['READ_MESSAGES', 'CREATE_INSTANT_INVITE'],
+                    allow: ['VIEW_CHANNEL', 'CREATE_INSTANT_INVITE'],
                     deny: ['SEND_MESSAGES']
                 },
                 {
@@ -277,15 +277,15 @@ client.on("message", msg => {
                 {
                     id: purgRoleName,
                     deny: ['SEND_MESSAGES'],
-                    allow: ['CREATE_INSTANT_INVITE', 'READ_MESSAGES', 'READ_MESSAGE_HISTORY']
+                    allow: ['CREATE_INSTANT_INVITE', 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY']
                 },
                 {
                     id: ModRoleName,
-                    allow: ['CREATE_INSTANT_INVITE', 'READ_MESSAGES', "SEND_MESSAGES", 'MANAGE_MESSAGES', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS', 'ADD_REACTIONS']
+                    allow: ['CREATE_INSTANT_INVITE', 'VIEW_CHANNEL', "SEND_MESSAGES", 'MANAGE_MESSAGES', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS', 'ADD_REACTIONS']
                 },
                 {
                     id: HelperRoleName,
-                    allow: ['CREATE_INSTANT_INVITE', 'READ_MESSAGES', "SEND_MESSAGES", 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS', 'ADD_REACTIONS']
+                    allow: ['CREATE_INSTANT_INVITE', 'VIEW_CHANNEL', "SEND_MESSAGES", 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS', 'ADD_REACTIONS']
                 }
 
             ]);
@@ -312,16 +312,16 @@ client.on("message", msg => {
                 },
                 {
                     id: CabeyGangRole,
-                    allow: ["CREATE_INSTANT_INVITE", 'READ_MESSAGES', 'SEND_MESSAGES', "EMBED_LINKS", 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS', 'ADD_REACTIONS']
+                    allow: ["CREATE_INSTANT_INVITE", 'VIEW_CHANNEL', 'SEND_MESSAGES', "EMBED_LINKS", 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS', 'ADD_REACTIONS']
                 },
                 {
                     id:purgRoleName,
-                    allow: ['CREATE_INSTANT_INVITE', 'READ_MESSAGES', 'READ_MESSAGE_HISTORY'],
+                    allow: ['CREATE_INSTANT_INVITE', 'VIEW_CHANNEL', 'READ_MESSAGE_HISTORY'],
                     deny: ['SEND_MESSAGES']
                 },
                 {
                     id: ModRoleName,
-                    allow: ['CREATE_INSTANT_INVITE', 'READ_MESSAGES', "SEND_MESSAGES", 'MANAGE_MESSAGES', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS', 'ADD_REACTIONS']
+                    allow: ['CREATE_INSTANT_INVITE', 'VIEW_CHANNEL', "SEND_MESSAGES", 'MANAGE_MESSAGES', 'EMBED_LINKS', 'ATTACH_FILES', 'READ_MESSAGE_HISTORY', 'USE_EXTERNAL_EMOJIS', 'ADD_REACTIONS']
                 },
 
             ]);
