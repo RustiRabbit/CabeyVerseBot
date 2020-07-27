@@ -29,7 +29,7 @@ client.on("message", msg => {
     if(firstMention != null) {
         if(firstMention.id == client.user.id) {
             console.log("the bot has been mentioned");
-            msg.channel.send("Bruh, you seriosily think that i'm going to help you if you ping me? Idiot.")
+            //msg.channel.send("Bruh, you seriosily think that i'm going to help you if you ping me? Idiot.")
         }
     }
     
