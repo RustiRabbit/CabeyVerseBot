@@ -25,6 +25,15 @@ client.on('ready', () => {
 })
 
 client.on("message", msg => {
+    var firstMention = msg.mentions.members.first();
+    if(firstMention != null) {
+        if(firstMention.id == client.user.id) {
+            console.log("the bot has been mentioned");
+            msg.channel.send("Bruh, you seriosily think that i'm going to help you if you ping me? Idiot.")
+        }
+    }
+    
+
     if(msg.channel.type === "dm") {
         
         console.log("DM: " + msg.channel.recipient.username + "#" + msg.channel.recipient.discriminator + ": " + msg.content);
