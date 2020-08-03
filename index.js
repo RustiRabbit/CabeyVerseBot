@@ -272,7 +272,13 @@ client.on("message", msg => {
         }
     } else if (msg.content.startsWith("!frog")) {
         msg.channel.send(":frog:");
-    } else if (msg.content.startsWith("!lock")) {
+    } else if (msg.content.startsWith("!megaban")) {
+        if(checkPerms(msg)) {
+            var member = msg.mentions.members.first();
+            member.send(":frog:");
+        }
+    }
+    else if (msg.content.startsWith("!lock")) {
         if(checkPerms(msg)) {
             console.log(getName(msg.member) + " locked #" + msg.channel.name);
             msg.channel.overwritePermissions([
