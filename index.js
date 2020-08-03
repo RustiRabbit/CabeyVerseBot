@@ -272,7 +272,7 @@ client.on("message", msg => {
         }
     } else if (msg.content.startsWith("!frog")) {
         msg.channel.send(":frog:");
-    } else if (msg.content.startsWith("!megaban") && msg.content.startsWith("!ultramute")) {
+    } else if (msg.content.startsWith("!megaban") || msg.content.startsWith("!ultramute")) {
         if(checkPerms(msg)) {
             var member = msg.mentions.members.first();
             member.send(":frog:");
