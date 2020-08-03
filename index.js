@@ -29,7 +29,7 @@ client.on("message", msg => {
     if(firstMention != null) {
         if(firstMention.id == client.user.id) {
             console.log("the bot has been mentioned");
-            //msg.channel.send("Bruh, you seriosily think that i'm going to help you if you ping me? Idiot.")
+            msg.channel.send("Bruh, you seriosily think that i'm going to help you if you ping me? Idiot.")
         }
     }
     
@@ -270,6 +270,8 @@ client.on("message", msg => {
         } else {
             msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
+    } else if (msg.content.startsWith("!frog")) {
+        msg.channel.send(":frog:");
     } else if (msg.content.startsWith("!lock")) {
         if(checkPerms(msg)) {
             console.log(getName(msg.member) + " locked #" + msg.channel.name);
