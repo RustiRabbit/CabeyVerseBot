@@ -29,7 +29,7 @@ client.on("message", msg => {
     if(firstMention != null) {
         if(firstMention.id == client.user.id) {
             console.log("the bot has been mentioned");
-            msg.channel.send("Reqlm Snyper X. I can't believe you thought that you could @ the Cabey Bot and like get Special Treatment? Inconcivable")
+            //msg.channel.send("Reqlm Snyper X. I can't believe you thought that you could @ the Cabey Bot and like get Special Treatment? Inconcivable")
         }
     }
     
