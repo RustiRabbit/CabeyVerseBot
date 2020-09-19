@@ -266,7 +266,7 @@ client.on("message", msg => {
             }
             channel.send(logsEmbed)
             console.log(getName(msg.member) + " warned " + getName(member));*/
-            msg.channel.send("Use Dyno ?warn [user] [reason]");
+
         } else {
             msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
