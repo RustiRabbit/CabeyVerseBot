@@ -230,7 +230,7 @@ client.on("message", msg => {
         }
     } else if(msg.content.startsWith("!warn")) {
         if(checkPerms(msg)) {
-            var member = msg.mentions.members.first();
+            /*var member = msg.mentions.members.first();
             
             const args = msg.content.split(" ");
             args.splice(0, 2)
@@ -265,8 +265,8 @@ client.on("message", msg => {
                 logsEmbed.setDescription(getName(msg.member) + " warned " + getName(member) + " with reason `" + output + "`");
             }
             channel.send(logsEmbed)
-            console.log(getName(msg.member) + " warned " + getName(member));
-            
+            console.log(getName(msg.member) + " warned " + getName(member));*/
+            msg.channel.send("Use Dyno ?warn [user] [reason]");
         } else {
             msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
         }
