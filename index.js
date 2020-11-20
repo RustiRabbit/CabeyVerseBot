@@ -25,13 +25,13 @@ client.on('ready', () => {
 })
 
 client.on("message", msg => {
-    var firstMention = msg.mentions.members.first();
+    /*var firstMention = msg.mentions.members.first();
     if(firstMention != null) {
         if(firstMention.id == client.user.id) {
             console.log("the bot has been mentioned");
             //msg.channel.send("Reqlm Snyper X. I can't believe you thought that you could @ the Cabey Bot and like get Special Treatment? Inconcivable")
         }
-    }
+    }*/
     
 
     if(msg.channel.type === "dm") {
@@ -115,21 +115,24 @@ client.on("message", msg => {
         var member = msg.mentions.members.first();
 
         if(checkPerms(msg) == true) {
-            member.roles.member.roles.set([purgRoleName]).then( () => {
-                msg.channel.send("`" + getName(member) + "` has been muted");
-                const channel = msg.client.channels.resolve(logsChannel);
-                const embed = new Discord.MessageEmbed();
-                embed.setTitle("User was placed in purg");
-                embed.setColor(0xff0000);
-                embed.setDescription(getName(msg.member) + " muted " + getName(member));
-                channel.send(embed)
-                console.log(getName(msg.member) + " muted " + getName(member))
-                
-    
+            let cabbage = msg.guild.roles.fetch(CabeyGangRole).then(role => {
+                member.roles.remove(role);
+                let muted = msg.guild.roles.fetch(purgRoleName).then(role => {
+                    member.roles.add(role)
+                    
+                    // Logging
+                    msg.channel.send("`" + getName(member) + "` has been muted");
+                    const channel = msg.client.channels.resolve(logsChannel);
+                    const embed = new Discord.MessageEmbed();
+                    embed.setTitle("User was placed in purg");
+                    embed.setColor(0xff0000);
+                    embed.setDescription(getName(msg.member) + " muted " + getName(member));
+                    channel.send(embed)
+                    console.log(getName(msg.member) + " muted " + getName(member))
+                })
             }).catch( (error)=> {
                 console.log(error);
                 msg.channel.send("Error (ask RustiRabbit). Maybe perm conflict?");
-                
             }); 
         } else {
             msg.author.send("You don't have the correct perms to use that command in Cabey's Hangout")
@@ -140,16 +143,22 @@ client.on("message", msg => {
         var member = msg.mentions.members.first();
         
         if(checkPerms(msg) == true) {
-            member.roles.member.roles.remove([purgRoleName]).then( () => {
-                member.roles.member.roles.set([CabeyGangRole]);
-                msg.channel.send("`" + getName(member) + "` has been removed from mute");
-                const channel = msg.client.channels.resolve(logsChannel);
-                const embed = new Discord.MessageEmbed();
-                embed.setTitle("User was unmuted");
-                embed.setColor(0xff0000);
-                embed.setDescription(getName(msg.member) + " unmuted " + getName(member));
-                channel.send(embed)
-                console.log(getName(msg.member) + " unmuted " + getName(member))
+            let muted = msg.guild.roles.fetch(purgRoleName).then(role => {
+                member.roles.remove(role)
+                let cabbage = msg.guild.roles.fetch(CabeyGangRole).then(role => {
+                    member.roles.add(role)
+
+                    // Logging
+                    member.roles.member.roles.set([CabeyGangRole]);
+                    msg.channel.send("`" + getName(member) + "` has been removed from mute");
+                    const channel = msg.client.channels.resolve(logsChannel);
+                    const embed = new Discord.MessageEmbed();
+                    embed.setTitle("User was unmuted");
+                    embed.setColor(0xff0000);
+                    embed.setDescription(getName(msg.member) + " unmuted " + getName(member));
+                    channel.send(embed)
+                    console.log(getName(msg.member) + " unmuted " + getName(member))
+                })
             }).catch( (error) => {
                 msg.channel.send("Error (ask RustiRabbit)");
                 console.log(error);
@@ -415,9 +424,6 @@ function checkPerms(msg) {
     allowed = false;
     for(i = 0; i < allowedRoles.length; i++) {
         if(msg.member.roles.cache.has(allowedRoles[i]) == true) {
-            if(msg.author.id == JediAccount) {
-                console.log("Jedi has said something!");
-            }
             allowed = true;
         }
     }
