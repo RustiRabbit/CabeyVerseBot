@@ -149,7 +149,6 @@ client.on("message", msg => {
                     member.roles.add(role)
 
                     // Logging
-                    member.roles.member.roles.set([CabeyGangRole]);
                     msg.channel.send("`" + getName(member) + "` has been removed from mute");
                     const channel = msg.client.channels.resolve(logsChannel);
                     const embed = new Discord.MessageEmbed();
