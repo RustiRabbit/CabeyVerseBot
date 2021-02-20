@@ -14,6 +14,7 @@ const ModRoleName = process.env.MOD_ROLE;
 const JediAccount = process.env.JEDI_ACCOUNT;
 const RustiRabbit = process.env.RUSTIRABBIT;
 const CabeyVerse = process.env.CABEYVERSE;
+const FrogRafPerms = process.env.FROGRAF;
 
 const allowedRoles = process.env.BOT_USER_ROLES.split(',');
 
@@ -36,12 +37,17 @@ client.on("message", msg => {
 
     if(msg.channel.type === "dm") {
         
-        console.log("DM: " + msg.channel.recipient.username + "#" + msg.channel.recipient.discriminator + ": " + msg.content);
+        /*console.log("DM: " + msg.channel.recipient.username + "#" + msg.channel.recipient.discriminator + ": " + msg.content);
         if(msg.channel.recipient.id != RustiRabbit && msg.channel.recipient.id != CabeyVerse) {
-            client.users.cache.get(RustiRabbit).send("DM: " + msg.channel.recipient.username + "#" + msg.channel.recipient.discriminator + ": `" + msg.content + "`");
+            console.log(RustiRabbit);
+            client.users.fetch(RustiRabbit).then((user) => {
+                console.log("SENT MESSAGE");
+                user.send("test");
+            })
+            //RustiUser.send("DM: " + msg.channel.recipient.username + "#" + msg.channel.recipient.discriminator + ": `" + msg.content + "`");
             client.users.cache.get(CabeyVerse).send("DM: " + msg.channel.recipient.username + "#" + msg.channel.recipient.discriminator + ": `" + msg.content + "`");
 
-        } 
+        } */
     }
 
     // Log Message
@@ -281,7 +287,7 @@ client.on("message", msg => {
     } else if (msg.content.startsWith("!frog")) {
         msg.channel.send(":frog:");
     } else if (msg.content.startsWith("!megaban") || msg.content.startsWith("!ultramute")) {
-        if(checkPerms(msg)) {
+        if(checkPerms(msg) || checkFrogRafPerms(msg)) {
             var member = msg.mentions.members.first();
             member.send(":frog:");
         }
@@ -426,6 +432,15 @@ function checkPerms(msg) {
             allowed = true;
         }
     }
+    return allowed;
+}
+
+function checkFrogRafPerms(msg) {
+    allowed = false;
+    if(msg.member.roles.cache.has(FrogRafPerms) == true) {
+        allowed = true;
+    }
+    
     return allowed;
 }
 
